@@ -415,6 +415,35 @@ function switchSection(fromEl, toEl) {
 const CONTRACT_ADDRESS =
     "0x661f68Fa1e197A5af621dd24dC3816028F2AA0df";
 
+const BOT_CHAIN = {
+    chainId: "0x2a5", // 677
+    chainName: "BOT Chain",
+    nativeCurrency: { name: "BOT", symbol: "BOT", decimals: 18 },
+    rpcUrls: ["0x3945Cff63E5216299c070E8206D6F2e96e822360"],
+    blockExplorerUrls: ["https://scan.botchain.ai"]
+};
+
+async function ensureBotChain() {
+    try {
+        await window.ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: BOT_CHAIN.chainId }]
+        });
+    } catch (error) {
+        // 4902 = jaringan belum ditambahkan di wallet
+        if (error.code === 4902 || error?.data?.originalError?.code === 4902) {
+            await window.ethereum.request({
+                method: "wallet_addEthereumChain",
+                params: [BOT_CHAIN]
+            });
+        } else {
+            throw error;
+        }
+    }
+}
+
+window.ethereum?.on("chainChanged", () => window.location.reload());
+
 // NETWORK: ganti ke "mainnet" saat siap submit
 const NETWORK = "mainnet";
 
@@ -684,6 +713,7 @@ async function connectWallet(event) {
 
     try {
 
+        await ensureBotChain();
         // Ask MetaMask to connect
         const accounts = await window.ethereum.request({
             method: "eth_requestAccounts"
@@ -772,6 +802,7 @@ async function saveCapsuleToBlockchain() {
             "Preparing transaction...";
 
         // Create provider
+        await ensureBotChain();
         const provider =
             new ethers.BrowserProvider(
                 window.ethereum
@@ -884,14 +915,10 @@ async function saveCapsuleToBlockchain() {
                 "You rejected the transaction."
             );
 
+        } else if (error.code === "INSUFFICIENT_FUNDS" || /insufficient funds/i.test(error.message)) {
+            walletStatus.textContent = "Not enough BOT for gas fees.";
         } else {
-
-            walletStatus.textContent =
-                "Transaction failed.";
-
-            alert(
-                "Failed to save capsule. Check the console for details."
-            );
+            walletStatus.textContent = "Transaction failed: " + (error.shortMessage || error.reason || error.message);
         }
     }
 
