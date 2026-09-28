@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIMELESS</title>
+    <link rel="icon" type="image/png" href="images/TIMELESS.png">
+    <!-- Linking Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header / Navbar-->
+    <header>
+        <nav class="navbar section-content">
+                <a href="#hero" class="nav-logo">
+                    <h2 class="logo-text">TIME/LESS</h2>
+                </a>
+                <ul class="nav-menu">
+                    <button id="menu-close-button" class="fas fa-times"></button>
+
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#create" class="nav-link">Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#my-capsule" class="nav-link">My Capsule</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="nav-connect-wallet">Connect Wallet</a>
+                    </li>
+                    </ul>
+                    
+                    <button id="menu-open-button" class="fas fa-bars"></button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+         <section class="hero-section" id="hero">
+
+            <!-- Interactive full-bleed liquid chrome shape -->
+            <div class="hero-hologram" id="hero-hologram">
+                <svg id="chrome-blob" class="chrome-blob" viewBox="0 0 1200 700"
+                     preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="chromeGradient" x1="0%" y1="0%" x2="100%" y2="100%" gradientUnits="objectBoundingBox">
+                            <stop offset="0%"   stop-color="#ffffff"/>
+                            <stop offset="14%"  stop-color="#ffd6ec"/>
+                            <stop offset="30%"  stop-color="#cfa0ab"/>
+                            <stop offset="46%"  stop-color="#8c8298"/>
+                            <stop offset="60%"  stop-color="#d9cdd9"/>
+                            <stop offset="76%"  stop-color="#ffbfe0"/>
+                            <stop offset="90%"  stop-color="#aaa3b4"/>
+                            <stop offset="100%" stop-color="#6d6274"/>
+                            <animateTransform id="chromeSpin" attributeName="gradientTransform" type="rotate"
+                                from="0 0.5 0.5" to="360 0.5 0.5" dur="22s" repeatCount="indefinite"/>
+                        </linearGradient>
+
+                        <filter id="liquidChrome" x="-40%" y="-40%" width="180%" height="180%">
+                            <!-- large slow waves = the folded "liquid" ribbons -->
+                            <feTurbulence id="turbulence" type="fractalNoise" baseFrequency="0.0035 0.006"
+                                numOctaves="4" seed="11" result="noise"/>
+                            <feDisplacementMap id="displace" in="SourceGraphic" in2="noise"
+                                scale="150" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+
+                            <!-- chrome specular highlights that follow the cursor -->
+                            <feSpecularLighting in="displaced" surfaceScale="5" specularConstant="1"
+                                specularExponent="22" lighting-color="#ffffff" result="spec">
+                                <fePointLight id="lightSource" x="800" y="260" z="260"/>
+                            </feSpecularLighting>
+                            <feComposite in="spec" in2="displaced" operator="in" result="specClipped"/>
+                            <feMerge>
+                                <feMergeNode in="displaced"/>
+                                <feMergeNode in="specClipped"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <rect x="-150" y="-150" width="1500" height="1000"
+                        fill="url(#chromeGradient)" filter="url(#liquidChrome)"/>
+                </svg>
+            </div>
+
+            <div class="section-content">
+                <div class="hero-details">
+                    <h2 class="title">Some moments<br>deserve to stay.</h2>
+                    <p class="description">Write something for the person<br>you'll become</p>
+
+                    <div class="buttons">
+                        <a href="#create" class="button create-capsule">Create Capsule</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Fullscreen veil used by the hero → About dissolve -->
+        <div class="hero-veil" id="hero-veil" aria-hidden="true"></div>
+
+        <!-- About Section -->
+         <section class="about-section" id="about">
+            <div class="section-content split-section">
+                <div class="split-heading">
+                    <h2 class="section-title section-title--left">A moment, made permanent.</h2>
+                </div>
+                <div class="split-content">
+                    <p class="text">TIME/LESS lets you write a message and record it on-chain. 
+                    A simple way to turn your thoughts, goals, and memories into something that lasts.</p>
+                </div>
+            </div>
+         </section>
+
+         <!-- How it works section -->
+          <section class="howitworks-section">
+            <div class="section-content split-section">
+                <div class="split-heading">
+                    <h2 class="section-title section-title--left">How It Works</h2>
+                </div>
+                <ul class="list split-content">
+                    <li class="item" style="--i:0">
+                        <span class="step-number">01</span>
+                        <div class="item-icon">
+                            <img src="images/write.png" alt="WRITE" class="image">
+                        </div>
+                        <div class="item-text">
+                            <h3 class="name">WRITE</h3>
+                            <p class="text">Put a thought into words</p>
+                        </div>
+                    </li>
+                    <li class="item" style="--i:1">
+                        <span class="step-number">02</span>
+                        <div class="item-icon">
+                            <img src="images/wallet.png" alt="LOCK" class="image">
+                        </div>
+                        <div class="item-text">
+                            <h3 class="name">LOCK</h3>
+                            <p class="text">Connect your wallet and make it permanent</p>
+                        </div>
+                    </li>
+                    <li class="item" style="--i:2">
+                        <span class="step-number">03</span>
+                        <div class="item-icon">
+                            <img src="images/star.png" alt="RETURN" class="image">
+                        </div>
+                        <div class="item-text">
+                            <h3 class="name">RETURN</h3>
+                            <p class="text">Come back to the moment you left behind</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+          </section>
+
+        <!-- Create Section -->
+         <section class="create-section" id="create">
+
+            <!-- Soft, lighter liquid chrome glow behind the form (not full page) -->
+            <div class="create-liquid" id="create-liquid" aria-hidden="true">
+                <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="createChromeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%"   stop-color="#ffffff"/>
+                            <stop offset="18%"  stop-color="#ffd6ec"/>
+                            <stop offset="36%"  stop-color="#cfa0ab"/>
+                            <stop offset="52%"  stop-color="#8c8298"/>
+                            <stop offset="68%"  stop-color="#d9cdd9"/>
+                            <stop offset="84%"  stop-color="#ffbfe0"/>
+                            <stop offset="100%" stop-color="#aaa3b4"/>
+                        </linearGradient>
+                        <filter id="createLiquid" x="-40%" y="-40%" width="180%" height="180%">
+                            <feTurbulence id="create-turb" type="fractalNoise" baseFrequency="0.005 0.008" numOctaves="4" seed="21" result="n"/>
+                            <feDisplacementMap in="SourceGraphic" in2="n" scale="120"
+                                xChannelSelector="R" yChannelSelector="G"/>
+                        </filter>
+                    </defs>
+                    <rect x="-100" y="-100" width="1000" height="800"
+                        fill="url(#createChromeGradient)" filter="url(#createLiquid)"/>
+                </svg>
+            </div>
+
+            <div class="section-content split-section">
+                <div class="split-heading">
+                    <h2 class="section-title section-title--left">Create Your Capsule</h2>
+                    <p class="section-subtitle">Write a message, set an unlock date, and lock it on-chain.</p>
+                </div>
+                <form class="capsule-form glass-card split-content" id="capsule-form">
+                    <div class="form-group">
+                        <label for="capsule-title" class="form-label">Title</label>
+                        <input
+                            type="text"
+                            id="capsule-title"
+                            placeholder="e.g. A letter to my future self"
+                            class="form-input"
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="capsule-message" class="form-label">Message</label>
+                        <textarea
+                            id="capsule-message"
+                            placeholder="Write something from your heart"
+                            class="form-input"
+                            required
+                        ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="unlock-date" class="form-label">Unlock Date</label>
+                        <input
+                            type="date"
+                            id="unlock-date"
+                            class="form-input"
+                            required
+                        >
+                        <p class="form-error" id="date-error" role="alert"></p>
+                    </div>
+                    <button type="submit" class="submit-button">
+                        Lock Capsule <span class="arrow" aria-hidden="true">&rarr;</span>
+                    </button>
+                </form>
+            </div>
+         </section>
+
+         <!-- Capsule Review Section -->
+        <section class="review-section" id="review">
+
+            <div class="center-liquid" aria-hidden="true">
+                <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="reviewChromeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%"   stop-color="#ffffff"/>
+                            <stop offset="18%"  stop-color="#ffd6ec"/>
+                            <stop offset="36%"  stop-color="#cfa0ab"/>
+                            <stop offset="52%"  stop-color="#8c8298"/>
+                            <stop offset="68%"  stop-color="#d9cdd9"/>
+                            <stop offset="84%"  stop-color="#ffbfe0"/>
+                            <stop offset="100%" stop-color="#aaa3b4"/>
+                        </linearGradient>
+                        <filter id="reviewLiquid" x="-40%" y="-40%" width="180%" height="180%">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.005 0.008" numOctaves="4" seed="33" result="n"/>
+                            <feDisplacementMap in="SourceGraphic" in2="n" scale="120" xChannelSelector="R" yChannelSelector="G"/>
+                        </filter>
+                    </defs>
+                    <rect x="-100" y="-100" width="1000" height="800" fill="url(#reviewChromeGradient)" filter="url(#reviewLiquid)"/>
+                </svg>
+            </div>
+
+            <h2 class="section-title">Review Your Capsule</h2>
+
+            <div class="section-content">
+                <div class="capsule-preview glass-card">
+
+                    <span class="preview-label">Title</span>
+                    <h3 id="preview-title"></h3>
+
+                    <span class="preview-label">Message</span>
+                    <p id="preview-message"></p>
+
+                    <div class="preview-date">
+                        <span class="preview-label">Unlock date</span>
+                        <strong id="preview-date"></strong>
+                    </div>
+
+                    <div class="review-buttons">
+                        <button type="button" class="review-button edit-button" id="edit-capsule">
+                            <span class="arrow" aria-hidden="true">&larr;</span> Edit
+                        </button>
+                        <button type="button" class="review-button continue-button" id="continue-wallet">
+                            Continue <span class="arrow" aria-hidden="true">&rarr;</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Connect Wallet Section -->
+        <section class="wallet-section" id="wallet">
+
+            <div class="center-liquid" aria-hidden="true">
+                <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="walletChromeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%"   stop-color="#ffffff"/>
+                            <stop offset="18%"  stop-color="#ffd6ec"/>
+                            <stop offset="36%"  stop-color="#cfa0ab"/>
+                            <stop offset="52%"  stop-color="#8c8298"/>
+                            <stop offset="68%"  stop-color="#d9cdd9"/>
+                            <stop offset="84%"  stop-color="#ffbfe0"/>
+                            <stop offset="100%" stop-color="#aaa3b4"/>
+                        </linearGradient>
+                        <filter id="walletLiquid" x="-40%" y="-40%" width="180%" height="180%">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.005 0.008" numOctaves="4" seed="47" result="n"/>
+                            <feDisplacementMap in="SourceGraphic" in2="n" scale="120" xChannelSelector="R" yChannelSelector="G"/>
+                        </filter>
+                    </defs>
+                    <rect x="-100" y="-100" width="1000" height="800" fill="url(#walletChromeGradient)" filter="url(#walletLiquid)"/>
+                </svg>
+            </div>
+
+            <h2 class="section-title">Connect Your Wallet</h2>
+
+            <div class="section-content">
+                <div class="wallet-box glass-card" id="wallet-box" data-state="disconnected">
+
+                    <div class="wallet-icon" aria-hidden="true">
+                        <i id="wallet-icon" class="fas fa-wallet"></i>
+                    </div>
+
+                    <p class="wallet-text" id="wallet-text">
+                        Connect your wallet to save your capsule permanently on-chain.
+                    </p>
+
+                    <div class="wallet-badge" id="wallet-badge">
+                        <span class="wallet-badge-dot"></span>
+                        <span id="wallet-badge-address"></span>
+                    </div>
+
+                    <div class="wallet-actions">
+                        <button type="button" class="wallet-button" id="connect-wallet-button">
+                            Connect Wallet
+                        </button>
+                        <button type="button" class="wallet-button" id="save-capsule-button">
+                            Save Capsule <span class="arrow" aria-hidden="true">&rarr;</span>
+                        </button>
+                        <button type="button" class="wallet-button" id="view-capsules-button">
+                            View My Capsule <span class="arrow" aria-hidden="true">&rarr;</span>
+                        </button>
+                        <button type="button" class="wallet-button wallet-button--outline" id="create-another-button">
+                        <span class="arrow" aria-hidden="true">&larr;</span> Create Another
+                    </button>
+                    </div>
+
+                    <p id="wallet-status" class="wallet-status"></p>
+                    <button type="button" class="wallet-back" id="wallet-back">
+                    <span class="arrow" aria-hidden="true">&larr;</span> Back to Review
+                </button>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- My Capsule Section -->
+<section class="my-capsule-section" id="my-capsule">
+
+    <div class="center-liquid" aria-hidden="true">
+        <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="myCapsuleChromeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%"   stop-color="#ffffff"/>
+                    <stop offset="18%"  stop-color="#ffd6ec"/>
+                    <stop offset="36%"  stop-color="#cfa0ab"/>
+                    <stop offset="52%"  stop-color="#8c8298"/>
+                    <stop offset="68%"  stop-color="#d9cdd9"/>
+                    <stop offset="84%"  stop-color="#ffbfe0"/>
+                    <stop offset="100%" stop-color="#aaa3b4"/>
+                </linearGradient>
+                <filter id="myCapsuleLiquid" x="-40%" y="-40%" width="180%" height="180%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.005 0.008" numOctaves="4" seed="59" result="n"/>
+                    <feDisplacementMap in="SourceGraphic" in2="n" scale="120" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+            </defs>
+            <rect x="-100" y="-100" width="1000" height="800" fill="url(#myCapsuleChromeGradient)" filter="url(#myCapsuleLiquid)"/>
+        </svg>
+    </div>
+
+    <div class="section-content split-section">
+        <div class="split-heading">
+            <h2 class="section-title section-title--left">My Capsules</h2>
+            <p class="section-subtitle">Your moments, waiting for you.</p>
+        </div>
+
+        <div class="split-content">
+            <p id="my-capsule-status" class="my-capsule-status">
+                Connect your wallet to see your capsules.
+            </p>
+            <div id="my-capsule-list" class="my-capsule-list"></div>
+        </div>
+    </div>
+
+</section>
+
+        <!-- Capsule Detail Section -->
+        <section class="capsule-detail-section" id="capsule-detail">
+
+            <div class="center-liquid" aria-hidden="true">
+                <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="detailChromeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%"   stop-color="#ffffff"/>
+                            <stop offset="18%"  stop-color="#ffd6ec"/>
+                            <stop offset="36%"  stop-color="#cfa0ab"/>
+                            <stop offset="52%"  stop-color="#8c8298"/>
+                            <stop offset="68%"  stop-color="#d9cdd9"/>
+                            <stop offset="84%"  stop-color="#ffbfe0"/>
+                            <stop offset="100%" stop-color="#aaa3b4"/>
+                        </linearGradient>
+                        <filter id="detailLiquid" x="-40%" y="-40%" width="180%" height="180%">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.005 0.008" numOctaves="4" seed="71" result="n"/>
+                            <feDisplacementMap in="SourceGraphic" in2="n" scale="120" xChannelSelector="R" yChannelSelector="G"/>
+                        </filter>
+                    </defs>
+                    <rect x="-100" y="-100" width="1000" height="800" fill="url(#detailChromeGradient)" filter="url(#detailLiquid)"/>
+                </svg>
+            </div>
+
+            <div class="section-content">
+
+                <button type="button" class="back-link" id="detail-back">
+                    <span class="arrow" aria-hidden="true">&larr;</span> Back to My Capsules
+                </button>
+
+                <div class="detail-card glass-card">
+
+                    <div class="detail-visual chrome-surface" id="detail-visual"></div>
+
+                    <div class="detail-info">
+                        <span class="preview-label" id="detail-number"></span>
+                        <h2 id="detail-title"></h2>
+
+                        <div class="detail-meta">
+                            <div class="detail-meta-item">
+                                <i class="fas fa-clock" aria-hidden="true"></i>
+                                <div>
+                                    <span class="preview-label">Created</span>
+                                    <strong id="detail-created"></strong>
+                                </div>
+                            </div>
+                            <div class="detail-meta-divider"></div>
+                            <div class="detail-meta-item">
+                                <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+                                <div>
+                                    <span class="preview-label">Opens</span>
+                                    <strong id="detail-opens"></strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="detail-status"></div>
+
+                        <div class="detail-message" id="detail-message"></div>
+
+                        <div class="detail-actions">
+                            <button type="button" class="detail-delete" id="detail-delete">Delete Capsule</button>
+                            <p class="detail-delete-status" id="detail-delete-status" role="status"></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+         <!-- Footer section -->
+        <footer class="footer-section">
+            <div class="section-content">
+                <div class="footer-brand">
+                    <a href="#hero" class="footer-logo">TIME/LESS</a>
+                    <p class="footer-tagline">Some moments deserve to stay.</p>
+                </div>
+                <p class="copyright-text">&copy; 2026 TIME/LESS</p>
+            </div>
+        </footer>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

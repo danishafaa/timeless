@@ -1,0 +1,1741 @@
+/* Importing Google fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "DM Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+:root {
+    /* Colors */
+    --background-color: #F8F7F8;
+    --soft-blush: #F0DAE2;
+    --deep-mauve: #6D6274;
+    --dusty-rose: #CFA0AB;
+    --muted-rose: #9E6876;
+    --silver-lilac: #AAA3B4;
+    --chrome-white: #F8F7F8;
+
+    /* Font Size */
+    --font-size-s: 0.9rem;
+    --font-size-n: 1rem;
+    --font-size-m: 1.12rem;
+    --font-size-l: 1.5rem;
+    --font-size-xl: 2rem;
+    --font-size-xxl: 2.6rem;
+
+    /* Font weight */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Border Radius */
+    --border-radius-s: 8px;
+    --border-radius-m: 30px;
+    --border-radius-circle: 50%;
+
+    /* Site max width */
+    --site-max-width: 1300px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Headline / display typography always uses the serif */
+h1, h2, h3, h4,
+.logo-text {
+    font-family: "Instrument Serif", serif;
+    font-weight: var(--font-weight-normal);
+}
+
+/* Stylings for whole site */
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+button{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+img {
+    width: 100%;
+}
+
+.section-content {
+    max-width: var(--site-max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    text-align: center;
+    padding: 0 0 60px;
+    font-size: var(--font-size-xl);
+}
+
+.section-title::after {
+    content: "";
+    width: 80px;
+    height: 3px;
+    display: block;
+    margin: 14px auto 0;
+    border-radius: var(--border-radius-s);
+    background: var(--deep-mauve);
+}
+
+/* Left-aligned heading variant, used by the split (heading | content) sections */
+.section-title--left {
+    text-align: left;
+    padding: 0;
+}
+
+.section-title--left::after {
+    margin: 14px 0 0;
+}
+
+/* =========================
+   SPLIT LAYOUT (heading left, content right)
+   Used by About, How It Works, and Create Your Capsule
+========================= */
+
+.split-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 80px;
+    position: relative;
+}
+
+/* Thin divider line between the heading column and the content column */
+.split-section::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    left: 340px; /* heading width (300px) + half of the 80px gap */
+    width: 1px;
+    background: var(--deep-mauve);
+    opacity: 0.3;
+}
+
+.split-section .split-heading {
+    flex: 0 0 300px;
+    max-width: 300px;
+    position: sticky;
+    top: 120px;
+    z-index: 1;
+}
+
+.split-section .split-content {
+    flex: 1;
+    min-width: 0;
+    z-index: 1;
+}
+
+/* Reveal-on-scroll: heading and content slide in from the right */
+.split-section .split-heading,
+.split-section .split-content {
+    opacity: 0;
+    transform: translateX(140px);
+    transition: opacity 1.1s ease, transform 1.3s cubic-bezier(0.16, 0.8, 0.2, 1);
+}
+
+.split-section .split-heading {
+    transition-delay: 0s;
+}
+
+.split-section .split-content {
+    transition-delay: 0.25s;
+}
+
+.split-section.is-visible .split-heading,
+.split-section.is-visible .split-content {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .split-section .split-heading,
+    .split-section .split-content {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .split-section::before {
+        display: none;
+    }
+}
+
+/* navbar styling */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+    background-color: transparent;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Once the user scrolls past the hero, give the navbar a soft
+   solid background so it doesn't visually collide with page content. */
+header.nav-solid {
+    background-color: rgba(240, 218, 226, 0.9);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 0 rgba(109, 98, 116, 0.08);
+}
+
+header .navbar {
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .nav-logo .logo-text {
+    color: var(--deep-mauve);
+    font-size: var(--font-size-xl);
+    letter-spacing: 0.5px;
+}
+
+.navbar .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar .nav-menu .nav-link {
+    padding: 10px 18px;
+    color: var(--deep-mauve);
+    font-size: var(--font-size-m);
+    border-radius: var(--border-radius-m);
+    transition: 0.3s ease;
+}
+
+.navbar .nav-menu .nav-link:hover {
+    background-color: var(--soft-blush);
+    color: var(--muted-rose);
+}
+
+#nav-connect-wallet {
+    background: var(--deep-mauve);
+    color: var(--background-color);
+}
+
+#nav-connect-wallet:hover {
+    background: var(--muted-rose);
+    color: var(--background-color);
+}
+
+/* Connected state: highlighted pill with live status dot */
+#nav-connect-wallet.is-connected {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 22px 10px 18px;
+    color: var(--background-color);
+    background: linear-gradient(135deg, var(--deep-mauve), var(--muted-rose));
+    box-shadow:
+        0 8px 22px rgba(109, 98, 116, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    animation: navWalletPop 0.6s cubic-bezier(0.16, 0.8, 0.2, 1);
+}
+
+#nav-connect-wallet.is-connected:hover {
+    color: var(--background-color);
+    background: linear-gradient(135deg, var(--muted-rose), var(--deep-mauve));
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 28px rgba(158, 104, 118, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.nav-wallet-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #7ee0a8;
+    animation: navDotPulse 2s infinite;
+}
+
+@keyframes navDotPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(126, 224, 168, 0.65); }
+    70%  { box-shadow: 0 0 0 8px rgba(126, 224, 168, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(126, 224, 168, 0); }
+}
+
+@keyframes navWalletPop {
+    0%   { transform: scale(0.85); opacity: 0.4; }
+    60%  { transform: scale(1.06); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.navbar :where(#menu-close-button, #menu-open-button) {
+    display: none;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero-section {
+    /* Pinned in place: the About section scrolls up over it, so the
+       interactive liquid chrome visually dissolves into a flat color
+       as the user scrolls — a real parallax reveal. */
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    z-index: 0;
+    background: linear-gradient(180deg, var(--dusty-rose) 0%, var(--soft-blush) 100%);
+    overflow: hidden;
+}
+
+.hero-section .section-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--deep-mauve);
+    position: relative;
+    z-index: 2;
+}
+
+.hero-section .hero-details .title {
+    max-width: 100%;
+    font-size: clamp(3.2rem, 9vw, 7rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--deep-mauve);
+}
+
+.hero-section .hero-details .description {
+    max-width: 60%;
+    margin: 24px 0 40px;
+    font-size: var(--font-size-m);
+    color: var(--muted-rose);
+}
+
+.hero-section .hero-details .buttons {
+    display: flex;
+}
+
+.hero-section .hero-details .button {
+    padding: 12px 30px;
+    border: 1px solid transparent;
+    color: var(--background-color);
+    border-radius: var(--border-radius-m);
+    background: var(--deep-mauve);
+    font-weight: var(--font-weight-medium);
+    transition: 0.3s ease;
+}
+
+.hero-section .hero-details .button:hover {
+    color: var(--deep-mauve);
+    border-color: var(--deep-mauve);
+    background: transparent;
+}
+
+/* =========================
+   INTERACTIVE LIQUID CHROME SHAPE
+   Full-bleed abstract chrome that fades to transparent at the
+   edges (and softly behind the copy) instead of a hard circle.
+========================= */
+
+.hero-hologram {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.15s ease-out;
+
+    -webkit-mask-image: radial-gradient(ellipse 85% 100% at 68% 42%,
+        #000 0%, #000 46%, rgba(0, 0, 0, 0.35) 70%, transparent 100%);
+    mask-image: radial-gradient(ellipse 85% 100% at 68% 42%,
+        #000 0%, #000 46%, rgba(0, 0, 0, 0.35) 70%, transparent 100%);
+}
+
+.chrome-blob {
+    position: absolute;
+    top: -18%;
+    left: -18%;
+    width: 136%;
+    height: 136%;
+    display: block;
+
+    transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0)
+               rotate(var(--parallax-rot, 0deg));
+    transition: transform 0.15s ease-out;
+
+    animation: chromeFloat 12s ease-in-out infinite;
+    will-change: transform;
+}
+
+@keyframes chromeFloat {
+    0%   { filter: brightness(1); }
+    50%  { filter: brightness(1.05); }
+    100% { filter: brightness(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .chrome-blob,
+    #chromeSpin {
+        animation: none !important;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .hero-hologram {
+        -webkit-mask-image: radial-gradient(ellipse 100% 65% at 50% 78%,
+            #000 0%, #000 40%, rgba(0, 0, 0, 0.3) 65%, transparent 100%);
+        mask-image: radial-gradient(ellipse 100% 65% at 50% 78%,
+            #000 0%, #000 40%, rgba(0, 0, 0, 0.3) 65%, transparent 100%);
+        opacity: 0.75;
+    }
+}
+
+/* About Section styling */
+.about-section {
+    position: relative;
+    z-index: 2;
+    /* Reserve the space the fixed hero would normally occupy */
+    margin-top: 100vh;
+    padding: 120px 0;
+    background: transparent;
+}
+
+/* Everything after the pinned hero sits above the veil */
+main > *:not(.hero-section):not(.hero-veil) {
+    position: relative;
+    z-index: 2;
+}
+
+/* Slide-in offsets must never create a horizontal scrollbar */
+main {
+    overflow-x: clip;
+}
+
+/* Fullscreen veil: fades from transparent to flat soft-blush as the user
+   scrolls, so the whole interactive hero dissolves uniformly into one color
+   (no box edges, no seam). */
+.hero-veil {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: var(--soft-blush);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hero-section .section-content {
+    will-change: transform, opacity;
+}
+
+.about-section .section-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-section .split-content .text {
+    max-width: 100%;
+    line-height: 1.7;
+    text-align: left;
+    font-size: var(--font-size-m);
+    color: var(--muted-rose);
+}
+
+/* How It Works */
+.howitworks-section {
+    color: var(--deep-mauve);
+    background: transparent;
+    padding: 0 0 120px;
+}
+
+.howitworks-section .list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.howitworks-section .list .item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    padding: 28px 26px 32px;
+    overflow: hidden;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.34);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    box-shadow:
+        0 14px 34px rgba(109, 98, 116, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+}
+
+/* Accent line that draws itself on hover */
+.howitworks-section .list .item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 26px;
+    right: 26px;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--dusty-rose), var(--deep-mauve));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.howitworks-section .list .item:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 26px 50px rgba(109, 98, 116, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.howitworks-section .list .item:hover::before {
+    transform: scaleX(1);
+}
+
+/* Cards enter one after another once the section is revealed */
+.split-section.is-visible .howitworks-section .list .item,
+.howitworks-section .split-section.is-visible .list .item {
+    animation: stepIn 0.8s cubic-bezier(0.16, 0.8, 0.2, 1) backwards;
+    animation-delay: calc(var(--i) * 0.18s + 0.5s);
+}
+
+@keyframes stepIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.howitworks-section .step-number {
+    position: absolute;
+    top: 14px;
+    right: 22px;
+    font-family: "Instrument Serif", serif;
+    font-size: 2.8rem;
+    line-height: 1;
+    color: rgba(207, 160, 171, 0.5);
+    transition: color 0.4s ease;
+}
+
+.howitworks-section .list .item:hover .step-number {
+    color: var(--dusty-rose);
+}
+
+.howitworks-section .item-icon {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), var(--soft-blush));
+    border: 1px solid rgba(207, 160, 171, 0.5);
+    box-shadow: 0 10px 22px rgba(109, 98, 116, 0.14);
+    animation: iconFloat 4s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.6s);
+}
+
+.howitworks-section .item-icon img {
+    width: 36px;
+    aspect-ratio: 1;
+    object-fit: contain;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.howitworks-section .list .item:hover .item-icon img {
+    transform: rotate(-10deg) scale(1.15);
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+}
+
+.howitworks-section .item-text .name {
+    margin: 0 0 6px;
+    font-size: var(--font-size-l);
+}
+
+.howitworks-section .item-text .text {
+    font-size: var(--font-size-m);
+    line-height: 1.5;
+    color: var(--muted-rose);
+}
+
+@media screen and (max-width: 640px) {
+    .howitworks-section .list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .howitworks-section .item-icon {
+        animation: none;
+    }
+}
+
+/* Create Section Styling */
+.create-section {
+    padding: 100px 0;
+    background: transparent;
+    overflow: clip;
+}
+
+.create-section .section-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Lighter, localized cousin of the hero's liquid chrome: it sits behind the
+   form card and fades out on every side, so it never fills the whole page. */
+.create-liquid {
+    position: absolute;
+    top: 4%;
+    right: -6%;
+    width: 68%;
+    height: 92%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+    transform: translate3d(var(--cl-x, 0px), var(--cl-y, 0px), 0);
+    transition: transform 0.4s ease-out;
+
+    -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%,
+        #000 0%, #000 30%, rgba(0, 0, 0, 0.4) 62%, transparent 100%);
+    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%,
+        #000 0%, #000 30%, rgba(0, 0, 0, 0.4) 62%, transparent 100%);
+}
+
+.create-liquid svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.section-subtitle {
+    margin-top: 22px;
+    max-width: 260px;
+    font-size: var(--font-size-m);
+    line-height: 1.6;
+    color: var(--muted-rose);
+}
+
+/* Glassmorphism card around the form */
+.glass-card {
+    padding: 40px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.34);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+    backdrop-filter: blur(22px) saturate(140%);
+    box-shadow:
+        0 20px 50px rgba(109, 98, 116, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.create-section .capsule-form {
+    max-width: 560px;
+}
+
+.create-section .form-group {
+    margin-bottom: 22px;
+}
+
+.create-section .form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.78rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--deep-mauve);
+}
+
+.create-section .capsule-form .form-input {
+    width: 100%;
+    height: 50px;
+    padding: 0 16px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 14px;
+    border: 1px solid rgba(207, 160, 171, 0.65);
+    color: var(--deep-mauve);
+    font-size: var(--font-size-n);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.create-section .capsule-form .form-input::placeholder {
+    color: var(--silver-lilac);
+}
+
+.create-section .capsule-form .form-input:focus {
+    border-color: var(--deep-mauve);
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 0 4px rgba(207, 160, 171, 0.25);
+}
+
+.create-section .capsule-form textarea.form-input {
+    height: 130px;
+    padding: 14px 16px;
+    resize: vertical;
+}
+
+.create-section .capsule-form .submit-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 32px;
+    margin-top: 6px;
+    color: var(--background-color);
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-medium);
+    background: var(--deep-mauve);
+    border-radius: var(--border-radius-m);
+    border: 1px solid var(--deep-mauve);
+    transition: 0.3s ease;
+}
+
+.create-section .capsule-form .submit-button .arrow {
+    transition: transform 0.3s ease;
+}
+
+.create-section .capsule-form .submit-button:hover {
+    color: var(--deep-mauve);
+    background: transparent;
+}
+
+.create-section .capsule-form .submit-button:hover .arrow {
+    transform: translateX(5px);
+}
+
+.form-error {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--muted-rose);
+}
+
+.form-error:empty {
+    display: none;
+}
+
+/* =========================
+   SHARED: liquid glow + section transitions
+========================= */
+
+.center-liquid {
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    width: 80%;
+    height: 90%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+    animation: liquidDrift 18s ease-in-out infinite alternate;
+
+    -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%,
+        #000 0%, #000 30%, rgba(0, 0, 0, 0.4) 62%, transparent 100%);
+    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%,
+        #000 0%, #000 30%, rgba(0, 0, 0, 0.4) 62%, transparent 100%);
+}
+
+.center-liquid svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+@keyframes liquidDrift {
+    from { transform: translate3d(-3%, -2%, 0) scale(1) rotate(0deg); }
+    to   { transform: translate3d(3%, 2%, 0) scale(1.08) rotate(4deg); }
+}
+
+@keyframes sectionLeave {
+    to { opacity: 0; transform: translateY(-30px) scale(0.98); }
+}
+
+@keyframes sectionEnter {
+    from { opacity: 0; transform: translateY(50px) scale(0.98); }
+    to   { opacity: 1; transform: none; }
+}
+
+.section-leave {
+    animation: sectionLeave 0.45s ease forwards;
+    pointer-events: none;
+}
+
+.section-enter {
+    animation: sectionEnter 0.9s cubic-bezier(0.16, 0.8, 0.2, 1) both;
+}
+
+@keyframes walletFadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .section-leave,
+    .section-enter,
+    .center-liquid {
+        animation: none;
+    }
+}
+
+/* =========================
+   CAPSULE REVIEW SECTION
+========================= */
+
+.review-section {
+    display: none;
+    position: relative;
+    padding: 110px 0 120px;
+    background: transparent;
+    overflow: hidden;
+}
+
+.review-section .section-title,
+.wallet-section .section-title {
+    position: relative;
+    z-index: 1;
+}
+
+.review-section .section-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.capsule-preview {
+    width: 100%;
+    max-width: 640px;
+    padding: 44px;
+}
+
+.preview-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.78rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--deep-mauve);
+}
+
+.capsule-preview h3 {
+    margin-bottom: 26px;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    line-height: 1.15;
+    color: var(--deep-mauve);
+    word-break: break-word;
+}
+
+.capsule-preview #preview-message {
+    min-height: 90px;
+    margin-bottom: 28px;
+    padding: 18px 20px;
+    font-size: var(--font-size-m);
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: var(--muted-rose);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(207, 160, 171, 0.45);
+    border-radius: 14px;
+}
+
+.preview-date {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 34px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(109, 98, 116, 0.2);
+}
+
+.preview-date strong {
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-medium);
+    color: var(--deep-mauve);
+}
+
+.review-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.review-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 32px;
+    border: 1px solid var(--deep-mauve);
+    border-radius: var(--border-radius-m);
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-medium);
+    transition: 0.3s ease;
+}
+
+.review-button .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.review-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(109, 98, 116, 0.18);
+}
+
+.review-button:active {
+    transform: scale(0.97);
+}
+
+/* Edit: outline at rest, fills on hover */
+.edit-button {
+    color: var(--deep-mauve);
+    background: transparent;
+}
+
+.edit-button:hover {
+    color: var(--background-color);
+    background: var(--deep-mauve);
+}
+
+.edit-button:hover .arrow {
+    transform: translateX(-5px);
+}
+
+/* Continue: deep mauve at rest, becomes outline on hover (like the hero button) */
+.continue-button {
+    color: var(--background-color);
+    background: var(--deep-mauve);
+}
+
+.continue-button:hover {
+    color: var(--deep-mauve);
+    background: transparent;
+}
+
+.continue-button:hover .arrow {
+    transform: translateX(5px);
+}
+
+/* =========================
+   CONNECT WALLET SECTION
+========================= */
+
+.wallet-section {
+    display: none;
+    position: relative;
+    padding: 110px 0 120px;
+    background: transparent;
+    overflow: hidden;
+}
+
+.wallet-section .section-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.wallet-box {
+    width: 100%;
+    max-width: 520px;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    text-align: center;
+}
+
+.wallet-icon {
+    width: 68px;
+    height: 68px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 1.6rem;
+    color: var(--background-color);
+    background: linear-gradient(135deg, var(--dusty-rose), var(--deep-mauve));
+    box-shadow:
+        0 12px 28px rgba(109, 98, 116, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.wallet-icon i {
+    font-family: "Font Awesome 7 Free", "Font Awesome 6 Free", "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+.wallet-text {
+    max-width: 380px;
+    font-size: var(--font-size-m);
+    line-height: 1.6;
+    color: var(--muted-rose);
+}
+
+/* Connected status (a badge, not a button) */
+.wallet-badge {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: var(--font-size-s);
+    font-weight: var(--font-weight-medium);
+    color: var(--deep-mauve);
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(207, 160, 171, 0.6);
+}
+
+.wallet-badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #6fbf95;
+    animation: dotPulse 2s infinite;
+}
+
+@keyframes dotPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(111, 191, 149, 0.55); }
+    70%  { box-shadow: 0 0 0 8px rgba(111, 191, 149, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(111, 191, 149, 0); }
+}
+
+.wallet-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.wallet-button {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 230px;
+    padding: 13px 32px;
+    color: var(--background-color);
+    background: var(--deep-mauve);
+    border: 1px solid var(--deep-mauve);
+    border-radius: var(--border-radius-m);
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-medium);
+    transition: 0.3s ease;
+    animation: walletFadeUp 0.5s ease backwards;
+}
+
+.wallet-button .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.wallet-button:hover:not(:disabled) {
+    color: var(--deep-mauve);
+    background: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(109, 98, 116, 0.18);
+}
+
+.wallet-button:hover:not(:disabled) .arrow {
+    transform: translateX(5px);
+}
+
+.wallet-button:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.wallet-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Secondary (outline) wallet button */
+.wallet-button--outline {
+    color: var(--deep-mauve);
+    background: transparent;
+}
+
+.wallet-button.wallet-button--outline:hover:not(:disabled) {
+    color: var(--background-color);
+    background: var(--deep-mauve);
+}
+
+.wallet-button.wallet-button--outline:hover:not(:disabled) .arrow {
+    transform: translateX(-5px);
+}
+
+.wallet-status {
+    font-size: var(--font-size-s);
+    line-height: 1.5;
+    color: var(--deep-mauve);
+}
+
+.wallet-status:empty {
+    display: none;
+}
+
+/* Which elements show in each state */
+.wallet-box[data-state="disconnected"] #connect-wallet-button {
+    display: inline-flex;
+}
+
+.wallet-box[data-state="connected"] .wallet-badge,
+.wallet-box[data-state="saved"] .wallet-badge {
+    display: inline-flex;
+    animation: walletFadeUp 0.5s ease backwards;
+}
+
+.wallet-box[data-state="connected"] #save-capsule-button,
+.wallet-box[data-state="saved"] #view-capsules-button,
+.wallet-box[data-state="saved"] #create-another-button {
+    display: inline-flex;
+}
+
+/* Small stagger so the second button eases in after the first */
+.wallet-box[data-state="saved"] #create-another-button {
+    animation-delay: 0.12s;
+}
+
+.wallet-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 4px;
+    font-size: var(--font-size-s);
+    color: var(--deep-mauve);
+    transition: color 0.3s ease;
+}
+
+.wallet-back .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.wallet-back:hover {
+    color: var(--muted-rose);
+}
+
+.wallet-back:hover .arrow {
+    transform: translateX(-5px);
+}
+
+/* Once saved there's nothing to go back to */
+.wallet-box[data-state="saved"] .wallet-back {
+    display: none;
+}
+
+/* =========================
+   MY CAPSULE SECTION
+========================= */
+
+.my-capsule-section {
+    position: relative;
+    padding: 110px 0 120px;
+    background: transparent;
+    overflow: clip; /* clip (not hidden) so the sticky heading still works */
+}
+
+.my-capsule-status {
+    margin-bottom: 20px;
+    font-size: var(--font-size-m);
+    color: var(--muted-rose);
+}
+
+.my-capsule-status:empty {
+    display: none;
+}
+
+.my-capsule-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+/* Shared liquid-chrome surface (card thumbnails + detail visual) */
+.chrome-surface {
+    background:
+        radial-gradient(60% 80% at 20% 25%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 60%),
+        radial-gradient(50% 70% at 80% 30%, rgba(255, 214, 236, 0.95) 0%, rgba(255, 214, 236, 0) 65%),
+        radial-gradient(70% 90% at 60% 90%, rgba(140, 130, 152, 0.85) 0%, rgba(140, 130, 152, 0) 70%),
+        conic-gradient(from var(--rot, 0deg) at 50% 50%,
+            #cfa0ab, #ffffff, #aaa3b4, #ffbfe0, #d9cdd9, #cfa0ab);
+}
+
+/* ---------- Capsule card ---------- */
+
+.capsule-card {
+    perspective: 900px;
+    cursor: pointer;
+    animation: cardIn 0.7s cubic-bezier(0.16, 0.8, 0.2, 1) backwards;
+    animation-delay: calc(var(--i, 0) * 80ms);
+}
+
+@keyframes cardIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.capsule-card-inner {
+    position: relative;
+    padding: 12px 12px 20px;
+    overflow: hidden;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    box-shadow:
+        0 14px 34px rgba(109, 98, 116, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+
+    /* Tilt / slide values are set by JS, opposite to the cursor */
+    transform: translate3d(var(--tx, 0px), var(--ty, 0px), 0)
+               rotateX(var(--rx, 0deg))
+               rotateY(var(--ry, 0deg))
+               scale(var(--s, 1));
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+    will-change: transform;
+}
+
+/* Glossy sheen that follows the cursor */
+.capsule-card-inner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+        rgba(255, 255, 255, 0.5), transparent 50%);
+}
+
+.capsule-card:hover .capsule-card-inner {
+    --s: 1.03;
+    box-shadow:
+        0 26px 54px rgba(109, 98, 116, 0.26),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.capsule-card:hover .capsule-card-inner::after {
+    opacity: 1;
+}
+
+.capsule-card:active .capsule-card-inner {
+    --s: 0.98;
+}
+
+.capsule-card:focus-within .capsule-card-inner {
+    box-shadow: 0 0 0 3px rgba(207, 160, 171, 0.6);
+}
+
+.capsule-thumb {
+    height: 130px;
+    border-radius: 14px;
+}
+
+.capsule-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 4px 0;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.capsule-status i {
+    font-size: 0.7rem;
+}
+
+.capsule-status.is-locked {
+    color: var(--background-color);
+    background: var(--deep-mauve);
+}
+
+.capsule-status.is-ready {
+    color: var(--deep-mauve);
+    background: linear-gradient(135deg, #ffd6ec, var(--dusty-rose));
+}
+
+.capsule-title {
+    margin: 12px 4px 10px;
+    font-size: 1.5rem;
+    line-height: 1.15;
+    color: var(--deep-mauve);
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.capsule-dates {
+    display: grid;
+    gap: 4px;
+    margin: 0 4px 14px;
+    font-size: 0.85rem;
+}
+
+.capsule-date-row {
+    display: flex;
+    gap: 14px;
+}
+
+.capsule-date-row span {
+    width: 58px;
+    color: var(--muted-rose);
+}
+
+.capsule-date-row strong {
+    color: var(--deep-mauve);
+}
+
+.capsule-view {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 4px;
+    padding: 0;
+    font-size: 0.85rem;
+    color: var(--deep-mauve);
+}
+
+.capsule-view .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.capsule-card:hover .capsule-view .arrow {
+    transform: translateX(6px);
+}
+
+/* =========================
+   CAPSULE DETAIL SECTION
+========================= */
+
+.capsule-detail-section {
+    display: none;
+    position: relative;
+    padding: 110px 0 120px;
+    background: transparent;
+    overflow: clip;
+}
+
+.capsule-detail-section .section-content {
+    position: relative;
+    z-index: 1;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 26px;
+    padding: 8px 4px;
+    font-size: var(--font-size-m);
+    color: var(--deep-mauve);
+    transition: color 0.3s ease;
+}
+
+.back-link .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--muted-rose);
+}
+
+.back-link:hover .arrow {
+    transform: translateX(-6px);
+}
+
+.detail-card {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 40px;
+    padding: 28px;
+}
+
+.detail-visual {
+    min-height: 380px;
+    border-radius: 20px;
+    background-size: 160% 160%, 160% 160%, 160% 160%, 100% 100%;
+    animation: chromeShift 12s ease-in-out infinite alternate;
+}
+
+@keyframes chromeShift {
+    from { background-position: 0% 0%, 100% 0%, 50% 100%, 50% 50%; }
+    to   { background-position: 100% 100%, 0% 60%, 30% 0%, 50% 50%; }
+}
+
+.detail-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    min-width: 0;
+    padding: 12px 12px 12px 0;
+}
+
+.detail-info .preview-label {
+    margin-bottom: 0;
+}
+
+.detail-info h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    color: var(--deep-mauve);
+    overflow-wrap: anywhere;
+}
+
+.detail-meta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    padding: 18px 0;
+    border-top: 1px solid rgba(109, 98, 116, 0.2);
+    border-bottom: 1px solid rgba(109, 98, 116, 0.2);
+}
+
+.detail-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.detail-meta-item i {
+    font-size: 1.2rem;
+    color: var(--muted-rose);
+}
+
+.detail-meta-item strong {
+    display: block;
+    margin-top: 4px;
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-medium);
+    color: var(--deep-mauve);
+}
+
+.detail-meta-divider {
+    align-self: stretch;
+    width: 1px;
+    background: rgba(109, 98, 116, 0.25);
+}
+
+.detail-info .capsule-status {
+    margin: 0;
+}
+
+/* Long messages scroll inside the box instead of stretching the page */
+.detail-message {
+    width: 100%;
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 20px 22px;
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    font-size: 1.35rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    color: var(--deep-mauve);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(207, 160, 171, 0.45);
+    border-radius: 16px;
+}
+
+.detail-message.is-locked {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 34px 22px;
+    text-align: center;
+    white-space: normal;
+    color: var(--muted-rose);
+}
+
+.detail-message.is-locked i {
+    font-size: 1.6rem;
+    color: var(--deep-mauve);
+}
+
+.detail-message.is-locked p {
+    font-family: "DM Sans", sans-serif;
+    font-style: normal;
+    font-size: var(--font-size-m);
+}
+
+.detail-actions {
+    margin-top: auto;
+}
+
+.detail-delete {
+    padding: 10px 22px;
+    border: 1px solid var(--muted-rose);
+    border-radius: var(--border-radius-m);
+    color: var(--muted-rose);
+    transition: 0.3s ease;
+}
+
+.detail-delete:hover {
+    color: var(--background-color);
+    background: var(--muted-rose);
+}
+
+.detail-delete.is-confirming {
+    color: var(--background-color);
+    background: var(--muted-rose);
+}
+
+.detail-delete:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.detail-delete-status {
+    margin-top: 12px;
+    font-size: var(--font-size-s);
+    line-height: 1.5;
+    color: var(--muted-rose);
+}
+
+.detail-delete-status:empty {
+    display: none;
+}
+
+@media screen and (max-width: 900px) {
+    .detail-card {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 20px;
+    }
+
+    .detail-visual {
+        min-height: 200px;
+    }
+
+    .detail-info {
+        padding: 0;
+    }
+
+    .detail-meta {
+        flex-wrap: wrap;
+    }
+}
+
+/* Footer section styling */
+.footer-section {
+    position: relative;
+    padding: 72px 0 28px;
+    overflow: hidden;
+    background:
+        radial-gradient(60% 120% at 85% 0%, rgba(255, 214, 236, 0.3) 0%, rgba(255, 214, 236, 0) 60%),
+        radial-gradient(50% 100% at 8% 100%, rgba(207, 160, 171, 0.4) 0%, rgba(207, 160, 171, 0) 65%),
+        var(--soft-blush);
+}
+
+.footer-section .section-content {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.footer-logo {
+    display: inline-block;
+    font-family: "Instrument Serif", serif;
+    font-size: var(--font-size-l);
+    line-height: 1;
+    letter-spacing: 0.5px;
+    color: var(--deep-mauve);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.footer-logo:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
+}
+
+.footer-tagline {
+    margin-top: 12px;
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    font-size: var(--font-size-m);
+    color: var(--deep-mauve);
+}
+
+.footer-section .copyright-text {
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--deep-mauve);
+}
+
+@media screen and (max-width: 600px) {
+    .footer-section .section-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Responsive media query code for max width 900px */
+@media screen and (max-width: 900px){
+    :root {
+    --font-size-m: 1rem;
+    --font-size-l: 1.3rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 1.8rem;
+    }
+
+    body.show-mobile-menu header:before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar :where(#menu-close-button, #menu-open-button) {
+        display: block;
+        font-size: var(--font-size-l);
+    }
+
+    .navbar #menu-close-button {
+        position: absolute;
+        right: 30px;
+        top: 30px;
+    }
+
+    .navbar #menu-open-button {
+        color: var(--background-color);
+    }
+
+    .navbar .nav-menu {
+        display: block;
+        position: fixed;
+        left: -300px;
+        top: 0;
+        width: 300px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 100px;
+        background: var(--background-color);
+        transition: left 0.2s ease;
+    }
+
+    /* backdrop-filter would turn the header into the containing block for the
+   fixed mobile menu + overlay, clipping them to the header's height */
+    header.nav-solid {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        background-color: rgba(240, 218, 226, 0.96);
+    }
+
+    body.show-mobile-menu .navbar .nav-menu {
+        left: 0;
+    }
+
+    .navbar .nav-menu .nav-link {
+        color: var(--deep-mauve);
+        display: block;
+        margin-top: 17px;
+        font-size: var(--font-size-l);
+    }
+
+    .hero-section .section-content {
+        gap: 50px;
+        text-align: center;
+        padding: 30px 20px 20px;
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+
+    .hero-section .hero-details :is(.title, .description) {
+        max-width: 100%;
+    }
+
+    .hero-section .hero-details .buttons {
+        justify-content: center;
+    }
+
+    .about-section .section-content {
+        gap: 32px;
+        flex-direction: column;
+        align-items: stretch;
+}
+
+    /* Stack the heading above the content on the split (About / How It Works / Create) sections */
+    .split-section {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .split-section .split-heading {
+        position: static;
+        max-width: 100%;
+        flex: none;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .section-subtitle {
+        max-width: 100%;
+    }
+
+    .glass-card {
+        padding: 26px 22px;
+    }
+
+    .split-section .split-content,
+    .create-section .capsule-form {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .create-liquid {
+        right: -20%;
+        width: 120%;
+        top: 30%;
+        height: 70%;
+        opacity: 0.5;
+    }
+}
