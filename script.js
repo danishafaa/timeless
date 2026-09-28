@@ -415,6 +415,20 @@ function switchSection(fromEl, toEl) {
 const CONTRACT_ADDRESS =
     "0x239FD697bDC211F3831413A1993f22afF3c2EAAC";
 
+// NETWORK: ganti ke "mainnet" saat siap submit
+const NETWORK = "testnet";
+
+const EXPLORERS = {
+    testnet: "https://scan.bohr.life",
+    mainnet: "https://scan.botchain.ai"
+};
+
+const EXPLORER_URL = `${EXPLORERS[NETWORK]}/address/${CONTRACT_ADDRESS}?tab=txs`;
+
+document.querySelectorAll(".js-explorer-link").forEach((link) => {
+    link.href = EXPLORER_URL;
+});
+
 const CONTRACT_ABI = [
     { "anonymous": false, "inputs": [ { 
         "indexed": true, "internalType": "uint256", "name": "capsuleId", "type": "uint256" }, 
