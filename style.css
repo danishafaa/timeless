@@ -1760,22 +1760,23 @@ main {
 }
 
 /* Round glass holder so any logo colours sit well on the blush background */
+/* Round black holder, matches the original BOT Chain logo */
 .built-on-logo-wrap {
     display: inline-grid;
     place-items: center;
     flex-shrink: 0;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(207, 160, 171, 0.55);
-    box-shadow: 0 4px 12px rgba(109, 98, 116, 0.14);
+    background: #000;
+    border: 1px solid rgba(0, 0, 0, 0.9);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 /* img { width: 100% } is global, so size the logo explicitly */
 .built-on-logo {
-    width: 18px;
-    height: 18px;
+    width: 26px;
+    height: 26px;
     object-fit: contain;
     display: block;
 }
@@ -1816,7 +1817,7 @@ main {
     align-items: center;
     gap: 12px;
     margin-top: 32px;
-    padding: 10px 26px 10px 12px;
+    padding: 8px 26px 8px 8px;
     color: var(--deep-mauve);
     font-size: var(--font-size-m);
     font-weight: var(--font-weight-medium);

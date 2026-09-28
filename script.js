@@ -416,7 +416,7 @@ const CONTRACT_ADDRESS =
     "0x239FD697bDC211F3831413A1993f22afF3c2EAAC";
 
 // NETWORK: ganti ke "mainnet" saat siap submit
-const NETWORK = "testnet";
+const NETWORK = "mainnet";
 
 const EXPLORERS = {
     testnet: "https://scan.bohr.life",
