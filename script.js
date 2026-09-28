@@ -413,7 +413,7 @@ function switchSection(fromEl, toEl) {
 
 // SMART CONTRACT CONFIGURATION
 const CONTRACT_ADDRESS =
-    "0x239FD697bDC211F3831413A1993f22afF3c2EAAC";
+    "0x661f68Fa1e197A5af621dd24dC3816028F2AA0df";
 
 // NETWORK: ganti ke "mainnet" saat siap submit
 const NETWORK = "mainnet";
@@ -430,27 +430,157 @@ document.querySelectorAll(".js-explorer-link").forEach((link) => {
 });
 
 const CONTRACT_ABI = [
-    { "anonymous": false, "inputs": [ { 
-        "indexed": true, "internalType": "uint256", "name": "capsuleId", "type": "uint256" }, 
-        { "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, 
-        { "indexed": false, "internalType": "string", "name": "title", "type": "string" }, 
-        { "indexed": false, "internalType": "uint256", "name": "unlockTime", "type": "uint256" } ], 
-        "name": "CapsuleCreated", "type": "event" }, { "inputs": [ { 
-            "internalType": "string", "name": "_title", "type": "string" }, 
-            { "internalType": "string", "name": "_message", "type": "string" }, 
-            { "internalType": "uint256", "name": "_unlockTime", "type": "uint256" } ], 
-            "name": "createCapsule", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, 
-            { "inputs": [ { "internalType": "uint256", "name": "_capsuleId", "type": "uint256" } ], 
-            "name": "deleteCapsule", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, 
-            { "inputs": [ { "internalType": "uint256", "name": "_capsuleId", "type": "uint256" } ], 
-            "name": "getCapsule", "outputs": [ { "components": [ { "internalType": "uint256", "name": "id", "type": "uint256" }, 
-                { "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "string", "name": "title", "type": "string" }, 
-                { "internalType": "string", "name": "message", "type": "string" }, { "internalType": "uint256", "name": "unlockTime", "type": "uint256" }, 
-                { "internalType": "uint256", "name": "createdAt", "type": "uint256" } ], "internalType": "struct TimeCapsule.Capsule", "name": "", "type": "tuple" } ], 
-                "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "getMyCapsules", "outputs": [ { 
-                    "internalType": "uint256[]", "name": "", "type": "uint256[]" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { 
-                        "internalType": "uint256", "name": "_capsuleId", "type": "uint256" } ], "name": "isUnlocked", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "stateMutability": "view", "type": "function" }
-];
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "uint256",
+                    "name": "capsuleId",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "owner",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "title",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "unlockTime",
+                    "type": "uint256"
+                }
+            ],
+            "name": "CapsuleCreated",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_title",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_message",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_unlockTime",
+                    "type": "uint256"
+                }
+            ],
+            "name": "createCapsule",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_capsuleId",
+                    "type": "uint256"
+                }
+            ],
+            "name": "deleteCapsule",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_capsuleId",
+                    "type": "uint256"
+                }
+            ],
+            "name": "getCapsule",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "uint256",
+                            "name": "id",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "owner",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "title",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "message",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "unlockTime",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "createdAt",
+                            "type": "uint256"
+                        }
+                    ],
+                    "internalType": "struct TimeCapsule.Capsule",
+                    "name": "",
+                    "type": "tuple"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getMyCapsules",
+            "outputs": [
+                {
+                    "internalType": "uint256[]",
+                    "name": "",
+                    "type": "uint256[]"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_capsuleId",
+                    "type": "uint256"
+                }
+            ],
+            "name": "isUnlocked",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ];
 
 // When Submit is clicked
 capsuleForm.addEventListener("submit", (event) => {
@@ -704,9 +834,8 @@ async function saveCapsuleToBlockchain() {
             return;
         }
 
-        walletStatus.textContent =
         saveCapsuleButton.disabled = true;
-            "Please confirm the transaction in MetaMask...";
+        walletStatus.textContent = "Please confirm the transaction in MetaMask...";
 
         // Send transaction
         const transaction =
@@ -766,10 +895,6 @@ async function saveCapsuleToBlockchain() {
         }
     }
 
-        if (unlockTimestamp <= currentTimestamp) {
-            walletStatus.textContent = "Unlock date must be in the future. Go back and pick a later date.";
-            return;
-        }
 }
 
 // MY CAPSULES: DATA + RENDERING
